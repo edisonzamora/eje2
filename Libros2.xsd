@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://elelemtos.com/Libro2/"
+	xmlns:tipos="http://elelemtos.com/Libro2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:element name="librosRequest" type="tipos:libro" />
+	<xsd:element name="librosResponse" type="tipos:listaLibros" />
+	<xsd:complexType name="listaLibros">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="libros"
+				type="tipos:libro" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="libro">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="1" name="id"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="nombre"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="autor"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" maxOccurs="1" name="codigo"
+				type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
