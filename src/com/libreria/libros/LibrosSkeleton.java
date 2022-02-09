@@ -16,10 +16,23 @@ public class LibrosSkeleton {
      * @param librosRequest
      * @return librosResponse
      */
-    public com.elelemtos.libro2.LibrosResponse buscaribrosO(
+    public com.elelemtos.libro2.LibrosResponse listaLibrosO(
         com.elelemtos.libro2.LibrosRequest librosRequest) {
         //TODO : fill this with the necessary business logic
         throw new java.lang.UnsupportedOperationException("Please implement " +
-            this.getClass().getName() + "#buscaribrosO");
+            this.getClass().getName() + "#listaLibrosO");
+    }
+
+    /**
+     * Auto generated method signature
+     *
+     * @param codigolibroRequest
+     * @return codigolibroResponse
+     */
+    public com.elelemtos.libro2.CodigolibroResponse buscarLibroPorCodigoO(
+        com.elelemtos.libro2.CodigolibroRequest codigolibroRequest) {
+        //TODO : fill this with the necessary business logic
+        throw new java.lang.UnsupportedOperationException("Please implement " +
+            this.getClass().getName() + "#buscarLibroPorCodigoO");
     }
 }

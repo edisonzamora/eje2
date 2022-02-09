@@ -38,19 +38,35 @@ public class LibrosMessageReceiverInOut extends org.apache.axis2.receivers.Abstr
             if ((op.getName() != null) &&
                     ((methodName = org.apache.axis2.util.JavaUtils.xmlNameToJavaIdentifier(
                             op.getName().getLocalPart())) != null)) {
-                if ("buscaribrosO".equals(methodName)) {
-                    com.elelemtos.libro2.LibrosResponse librosResponse5 = null;
+                if ("listaLibrosO".equals(methodName)) {
+                    com.elelemtos.libro2.LibrosResponse librosResponse9 = null;
                     com.elelemtos.libro2.LibrosRequest wrappedParam = (com.elelemtos.libro2.LibrosRequest) fromOM(msgContext.getEnvelope()
                                                                                                                             .getBody()
                                                                                                                             .getFirstElement(),
                             com.elelemtos.libro2.LibrosRequest.class);
 
-                    librosResponse5 = skel.buscaribrosO(wrappedParam);
+                    librosResponse9 = skel.listaLibrosO(wrappedParam);
 
                     envelope = toEnvelope(getSOAPFactory(msgContext),
-                            librosResponse5, false,
+                            librosResponse9, false,
                             new javax.xml.namespace.QName(
                                 "http://elelemtos.com/Libro2/", "librosResponse"));
+                } else
+                 if ("buscarLibroPorCodigoO".equals(methodName)) {
+                    com.elelemtos.libro2.CodigolibroResponse codigolibroResponse11 =
+                        null;
+                    com.elelemtos.libro2.CodigolibroRequest wrappedParam = (com.elelemtos.libro2.CodigolibroRequest) fromOM(msgContext.getEnvelope()
+                                                                                                                                      .getBody()
+                                                                                                                                      .getFirstElement(),
+                            com.elelemtos.libro2.CodigolibroRequest.class);
+
+                    codigolibroResponse11 = skel.buscarLibroPorCodigoO(wrappedParam);
+
+                    envelope = toEnvelope(getSOAPFactory(msgContext),
+                            codigolibroResponse11, false,
+                            new javax.xml.namespace.QName(
+                                "http://elelemtos.com/Libro2/",
+                                "codigolibroResponse"));
                 } else {
                     throw new java.lang.RuntimeException("method not found");
                 }
@@ -85,6 +101,28 @@ public class LibrosMessageReceiverInOut extends org.apache.axis2.receivers.Abstr
         }
     }
 
+    private org.apache.axiom.om.OMElement toOM(
+        com.elelemtos.libro2.CodigolibroRequest param, boolean optimizeContent)
+        throws org.apache.axis2.AxisFault {
+        try {
+            return param.getOMElement(com.elelemtos.libro2.CodigolibroRequest.MY_QNAME,
+                org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+        } catch (org.apache.axis2.databinding.ADBException e) {
+            throw org.apache.axis2.AxisFault.makeFault(e);
+        }
+    }
+
+    private org.apache.axiom.om.OMElement toOM(
+        com.elelemtos.libro2.CodigolibroResponse param, boolean optimizeContent)
+        throws org.apache.axis2.AxisFault {
+        try {
+            return param.getOMElement(com.elelemtos.libro2.CodigolibroResponse.MY_QNAME,
+                org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+        } catch (org.apache.axis2.databinding.ADBException e) {
+            throw org.apache.axis2.AxisFault.makeFault(e);
+        }
+    }
+
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         com.elelemtos.libro2.LibrosResponse param, boolean optimizeContent,
@@ -103,8 +141,32 @@ public class LibrosMessageReceiverInOut extends org.apache.axis2.receivers.Abstr
         }
     }
 
-    private com.elelemtos.libro2.LibrosResponse wrapbuscaribrosO() {
+    private com.elelemtos.libro2.LibrosResponse wraplistaLibrosO() {
         com.elelemtos.libro2.LibrosResponse wrappedElement = new com.elelemtos.libro2.LibrosResponse();
+
+        return wrappedElement;
+    }
+
+    private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
+        org.apache.axiom.soap.SOAPFactory factory,
+        com.elelemtos.libro2.CodigolibroResponse param,
+        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        throws org.apache.axis2.AxisFault {
+        try {
+            org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+
+            emptyEnvelope.getBody()
+                         .addChild(param.getOMElement(
+                    com.elelemtos.libro2.CodigolibroResponse.MY_QNAME, factory));
+
+            return emptyEnvelope;
+        } catch (org.apache.axis2.databinding.ADBException e) {
+            throw org.apache.axis2.AxisFault.makeFault(e);
+        }
+    }
+
+    private com.elelemtos.libro2.CodigolibroResponse wrapbuscarLibroPorCodigoO() {
+        com.elelemtos.libro2.CodigolibroResponse wrappedElement = new com.elelemtos.libro2.CodigolibroResponse();
 
         return wrappedElement;
     }
@@ -120,6 +182,14 @@ public class LibrosMessageReceiverInOut extends org.apache.axis2.receivers.Abstr
     private java.lang.Object fromOM(org.apache.axiom.om.OMElement param,
         java.lang.Class type) throws org.apache.axis2.AxisFault {
         try {
+            if (com.elelemtos.libro2.CodigolibroRequest.class.equals(type)) {
+                return com.elelemtos.libro2.CodigolibroRequest.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+            }
+
+            if (com.elelemtos.libro2.CodigolibroResponse.class.equals(type)) {
+                return com.elelemtos.libro2.CodigolibroResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+            }
+
             if (com.elelemtos.libro2.LibrosRequest.class.equals(type)) {
                 return com.elelemtos.libro2.LibrosRequest.Factory.parse(param.getXMLStreamReaderWithoutCaching());
             }
