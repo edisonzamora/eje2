@@ -1,46 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions name="Libro2" targetNamespace="http://libreria.com/Libro2/"
-	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:lib="http://libreria.com/Libro2/"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:l="http://elelemtos.com/Libro2/"
-	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
-	<wsdl:types>
-		<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema">
-			<xsd:import namespace="http://elelemtos.com/Libro2/"
-				schemaLocation="Libros2.xsd" />
+<wsdl:definitions name="Libro2" targetNamespace="http://libreria.com/Libro2/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:lib="http://libreria.com/Libro2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:l="http://elelemtos.com/Libro2/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="http://elelemtos.com/Libro2/" schemaLocation="Libros2.xsd"/>
 		</xsd:schema>
-	</wsdl:types>
-	<wsdl:message name="librosRequestM">
-		<wsdl:part name="parameters" element="l:librosRequest">
-		</wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="librosResponseM">
-		<wsdl:part name="parameters" element="l:librosResponse">
-		</wsdl:part>
-	</wsdl:message>
-	<wsdl:portType name="librosPT">
-		<wsdl:operation name="buscaribrosO">
-			<wsdl:input message="lib:librosRequestM">
-			</wsdl:input>
-			<wsdl:output message="lib:librosResponseM">
-			</wsdl:output>
-		</wsdl:operation>
-	</wsdl:portType>
-	<wsdl:binding name="LibrosSOAP" type="lib:librosPT">
-		<soap:binding style="document"
-			transport="http://schemas.xmlsoap.org/soap/http" />
-		<wsdl:operation name="buscaribrosO">
-			<soap:operation soapAction="buscarLibro" />
-			<wsdl:input>
-				<soap:body parts="parameters" use="literal" />
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body parts="parameters" use="literal" />
-			</wsdl:output>
-		</wsdl:operation>
-	</wsdl:binding>
-	<wsdl:service name="Libros">
-		<wsdl:port name="LibrosSOAP" binding="lib:LibrosSOAP">
-			<soap:address location="http://localhost:9090/libreria/services/libros2" />
-		</wsdl:port>
-	</wsdl:service>
+  </wsdl:types>
+  <wsdl:message name="librosRequestM">
+    <wsdl:part name="parameters" element="l:librosRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="librosResponseM">
+    <wsdl:part name="parameters" element="l:librosResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="libroCodigoRequestM">
+    <wsdl:part name="parameters" element="l:codigolibroRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="libroCodigoResponseM">
+    <wsdl:part name="parameters" element="l:codigolibroResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="librosPT">
+    <wsdl:operation name="listaLibrosO">
+      <wsdl:input message="lib:librosRequestM">
+    </wsdl:input>
+      <wsdl:output message="lib:librosResponseM">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buscarLibroPorCodigoO">
+      <wsdl:input message="lib:libroCodigoRequestM">
+    </wsdl:input>
+      <wsdl:output message="lib:libroCodigoResponseM">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Libros2SOAP" type="lib:librosPT">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="listaLibrosO">
+      <soap:operation soapAction="listaLibrosO" style="document"/>
+      <wsdl:input>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buscarLibroPorCodigoO">
+      <soap:operation soapAction="buscarLibroPorCodigoO" style="document"/>
+      <wsdl:input>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Libros">
+    <wsdl:port name="LibrosSOAP" binding="lib:Libros2SOAP">
+      <soap:address location="http://localhost:9090/libreria/services/libros2"/>
+    </wsdl:port>
+  </wsdl:service>
 </wsdl:definitions>
