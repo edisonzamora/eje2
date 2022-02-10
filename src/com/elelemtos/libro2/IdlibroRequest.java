@@ -1,5 +1,5 @@
 /**
- * CodigolibroRequest.java
+ * IdlibroRequest.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.7.9  Built on : Nov 16, 2018 (12:06:07 GMT)
@@ -8,46 +8,46 @@ package com.elelemtos.libro2;
 
 
 /**
- *  CodigolibroRequest bean class
+ *  IdlibroRequest bean class
  */
 @SuppressWarnings({"unchecked",
     "unused"
 })
-public class CodigolibroRequest implements org.apache.axis2.databinding.ADBBean {
+public class IdlibroRequest implements org.apache.axis2.databinding.ADBBean {
     public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://elelemtos.com/Libro2/",
-            "codigolibroRequest", "ns1");
+            "idlibroRequest", "ns1");
 
     /**
-     * field for Codigo
+     * field for Id
      */
-    protected java.lang.String localCodigo;
+    protected java.lang.String localId;
 
     /*  This tracker boolean wil be used to detect whether the user called the set method
      *   for this attribute. It will be used to determine whether to include this field
      *   in the serialized XML
      */
-    protected boolean localCodigoTracker = false;
+    protected boolean localIdTracker = false;
 
-    public boolean isCodigoSpecified() {
-        return localCodigoTracker;
+    public boolean isIdSpecified() {
+        return localIdTracker;
     }
 
     /**
      * Auto generated getter method
      * @return java.lang.String
      */
-    public java.lang.String getCodigo() {
-        return localCodigo;
+    public java.lang.String getId() {
+        return localId;
     }
 
     /**
      * Auto generated setter method
-     * @param param Codigo
+     * @param param Id
      */
-    public void setCodigo(java.lang.String param) {
-        localCodigoTracker = param != null;
+    public void setId(java.lang.String param) {
+        localIdTracker = param != null;
 
-        this.localCodigo = param;
+        this.localId = param;
     }
 
     /**
@@ -91,24 +91,24 @@ public class CodigolibroRequest implements org.apache.axis2.databinding.ADBBean 
                     (namespacePrefix.trim().length() > 0)) {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    namespacePrefix + ":codigolibroRequest", xmlWriter);
+                    namespacePrefix + ":idlibroRequest", xmlWriter);
             } else {
                 writeAttribute("xsi",
                     "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    "codigolibroRequest", xmlWriter);
+                    "idlibroRequest", xmlWriter);
             }
         }
 
-        if (localCodigoTracker) {
+        if (localIdTracker) {
             namespace = "http://elelemtos.com/Libro2/";
-            writeStartElement(null, namespace, "codigo", xmlWriter);
+            writeStartElement(null, namespace, "id", xmlWriter);
 
-            if (localCodigo == null) {
+            if (localId == null) {
                 // write the nil attribute
                 throw new org.apache.axis2.databinding.ADBException(
-                    "codigo cannot be null!!");
+                    "id cannot be null!!");
             } else {
-                xmlWriter.writeCharacters(localCodigo);
+                xmlWriter.writeCharacters(localId);
             }
 
             xmlWriter.writeEndElement();
@@ -332,9 +332,9 @@ public class CodigolibroRequest implements org.apache.axis2.databinding.ADBBean 
          * Postcondition: If this object is an element, the reader is positioned at its end element
          *                If this object is a complex type, the reader is positioned at the end element of its outer element
          */
-        public static CodigolibroRequest parse(
+        public static IdlibroRequest parse(
             javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
-            CodigolibroRequest object = new CodigolibroRequest();
+            IdlibroRequest object = new IdlibroRequest();
 
             int event;
             javax.xml.namespace.QName currentQName = null;
@@ -366,12 +366,12 @@ public class CodigolibroRequest implements org.apache.axis2.databinding.ADBBean 
                         java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
                                     ":") + 1);
 
-                        if (!"codigolibroRequest".equals(type)) {
+                        if (!"idlibroRequest".equals(type)) {
                             //find namespace for the prefix
                             java.lang.String nsUri = reader.getNamespaceContext()
                                                            .getNamespaceURI(nsPrefix);
 
-                            return (CodigolibroRequest) com.elelemtos.libro2.ExtensionMapper.getTypeObject(nsUri,
+                            return (IdlibroRequest) com.elelemtos.libro2.ExtensionMapper.getTypeObject(nsUri,
                                 type, reader);
                         }
                     }
@@ -388,7 +388,7 @@ public class CodigolibroRequest implements org.apache.axis2.databinding.ADBBean 
 
                 if (reader.isStartElement() &&
                         new javax.xml.namespace.QName(
-                            "http://elelemtos.com/Libro2/", "codigo").equals(
+                            "http://elelemtos.com/Libro2/", "id").equals(
                             reader.getName())) {
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -396,12 +396,12 @@ public class CodigolibroRequest implements org.apache.axis2.databinding.ADBBean 
                     if ("true".equals(nillableValue) ||
                             "1".equals(nillableValue)) {
                         throw new org.apache.axis2.databinding.ADBException(
-                            "The element: " + "codigo" + "  cannot be null");
+                            "The element: " + "id" + "  cannot be null");
                     }
 
                     java.lang.String content = reader.getElementText();
 
-                    object.setCodigo(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    object.setId(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
                             content));
 
                     reader.next();

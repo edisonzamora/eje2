@@ -23,11 +23,6 @@ public class ExtensionMapper {
         }
 
         if ("http://elelemtos.com/Libro2/".equals(namespaceURI) &&
-                "codigo".equals(typeName)) {
-            return com.elelemtos.libro2.Codigo.Factory.parse(reader);
-        }
-
-        if ("http://elelemtos.com/Libro2/".equals(namespaceURI) &&
                 "listaLibros".equals(typeName)) {
             return com.elelemtos.libro2.ListaLibros.Factory.parse(reader);
         }

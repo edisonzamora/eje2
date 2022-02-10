@@ -20,13 +20,13 @@ public class LibrosRequest implements org.apache.axis2.databinding.ADBBean {
     /**
      * field for LibrosRequest
      */
-    protected com.elelemtos.libro2.Libro localLibrosRequest;
+    protected org.apache.axiom.om.OMElement localLibrosRequest;
 
     /**
      * Auto generated getter method
-     * @return com.elelemtos.libro2.Libro
+     * @return org.apache.axiom.om.OMElement
      */
-    public com.elelemtos.libro2.Libro getLibrosRequest() {
+    public org.apache.axiom.om.OMElement getLibrosRequest() {
         return localLibrosRequest;
     }
 
@@ -34,7 +34,7 @@ public class LibrosRequest implements org.apache.axis2.databinding.ADBBean {
      * Auto generated setter method
      * @param param LibrosRequest
      */
-    public void setLibrosRequest(com.elelemtos.libro2.Libro param) {
+    public void setLibrosRequest(org.apache.axiom.om.OMElement param) {
         this.localLibrosRequest = param;
     }
 
@@ -64,12 +64,36 @@ public class LibrosRequest implements org.apache.axis2.databinding.ADBBean {
         throws javax.xml.stream.XMLStreamException,
             org.apache.axis2.databinding.ADBException {
         //We can safely assume an element has only one type associated with it
-        if (localLibrosRequest == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "librosRequest cannot be null!");
+        java.lang.String namespace = "http://elelemtos.com/Libro2/";
+        java.lang.String _localName = "librosRequest";
+
+        writeStartElement(null, namespace, _localName, xmlWriter);
+
+        // add the type details if this is used in a simple type
+        if (serializeType) {
+            java.lang.String namespacePrefix = registerPrefix(xmlWriter,
+                    "http://elelemtos.com/Libro2/");
+
+            if ((namespacePrefix != null) &&
+                    (namespacePrefix.trim().length() > 0)) {
+                writeAttribute("xsi",
+                    "http://www.w3.org/2001/XMLSchema-instance", "type",
+                    namespacePrefix + ":librosRequest", xmlWriter);
+            } else {
+                writeAttribute("xsi",
+                    "http://www.w3.org/2001/XMLSchema-instance", "type",
+                    "librosRequest", xmlWriter);
+            }
         }
 
-        localLibrosRequest.serialize(MY_QNAME, xmlWriter);
+        if (localLibrosRequest == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "librosRequest cannot be null !!");
+        } else {
+            localLibrosRequest.serialize(xmlWriter);
+        }
+
+        xmlWriter.writeEndElement();
     }
 
     private static java.lang.String generatePrefix(java.lang.String namespace) {
@@ -309,12 +333,16 @@ public class LibrosRequest implements org.apache.axis2.databinding.ADBBean {
 
                 while (!reader.isEndElement()) {
                     if (reader.isStartElement()) {
-                        if (reader.isStartElement() &&
-                                new javax.xml.namespace.QName(
-                                    "http://elelemtos.com/Libro2/",
-                                    "librosRequest").equals(reader.getName())) {
-                            object.setLibrosRequest(com.elelemtos.libro2.Libro.Factory.parse(
-                                    reader));
+                        if (reader.isStartElement()) {
+                            //use the QName from the parser as the name for the builder
+                            javax.xml.namespace.QName startQname1 = reader.getName();
+
+                            // We need to wrap the reader so that it produces a fake START_DOCUMENT event
+                            // this is needed by the builder classes
+                            org.apache.axis2.databinding.utils.NamedStaxOMBuilder builder1 =
+                                new org.apache.axis2.databinding.utils.NamedStaxOMBuilder(new org.apache.axis2.util.StreamWrapper(
+                                        reader), startQname1);
+                            object.setLibrosRequest(builder1.getOMElement());
                         } // End of if for expected property start element
 
                         else {

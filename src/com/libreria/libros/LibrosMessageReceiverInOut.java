@@ -39,31 +39,46 @@ public class LibrosMessageReceiverInOut extends org.apache.axis2.receivers.Abstr
                     ((methodName = org.apache.axis2.util.JavaUtils.xmlNameToJavaIdentifier(
                             op.getName().getLocalPart())) != null)) {
                 if ("listaLibrosO".equals(methodName)) {
-                    com.elelemtos.libro2.LibrosResponse librosResponse9 = null;
+                    com.elelemtos.libro2.LibrosResponse librosResponse13 = null;
                     com.elelemtos.libro2.LibrosRequest wrappedParam = (com.elelemtos.libro2.LibrosRequest) fromOM(msgContext.getEnvelope()
                                                                                                                             .getBody()
                                                                                                                             .getFirstElement(),
                             com.elelemtos.libro2.LibrosRequest.class);
 
-                    librosResponse9 = skel.listaLibrosO(wrappedParam);
+                    librosResponse13 = skel.listaLibrosO(wrappedParam);
 
                     envelope = toEnvelope(getSOAPFactory(msgContext),
-                            librosResponse9, false,
+                            librosResponse13, false,
                             new javax.xml.namespace.QName(
                                 "http://elelemtos.com/Libro2/", "librosResponse"));
                 } else
+                 if ("buscarLibroPorIdO".equals(methodName)) {
+                    com.elelemtos.libro2.IdlibroResponse idlibroResponse15 = null;
+                    com.elelemtos.libro2.IdlibroRequest wrappedParam = (com.elelemtos.libro2.IdlibroRequest) fromOM(msgContext.getEnvelope()
+                                                                                                                              .getBody()
+                                                                                                                              .getFirstElement(),
+                            com.elelemtos.libro2.IdlibroRequest.class);
+
+                    idlibroResponse15 = skel.buscarLibroPorIdO(wrappedParam);
+
+                    envelope = toEnvelope(getSOAPFactory(msgContext),
+                            idlibroResponse15, false,
+                            new javax.xml.namespace.QName(
+                                "http://elelemtos.com/Libro2/",
+                                "idlibroResponse"));
+                } else
                  if ("buscarLibroPorCodigoO".equals(methodName)) {
-                    com.elelemtos.libro2.CodigolibroResponse codigolibroResponse11 =
+                    com.elelemtos.libro2.CodigolibroResponse codigolibroResponse17 =
                         null;
                     com.elelemtos.libro2.CodigolibroRequest wrappedParam = (com.elelemtos.libro2.CodigolibroRequest) fromOM(msgContext.getEnvelope()
                                                                                                                                       .getBody()
                                                                                                                                       .getFirstElement(),
                             com.elelemtos.libro2.CodigolibroRequest.class);
 
-                    codigolibroResponse11 = skel.buscarLibroPorCodigoO(wrappedParam);
+                    codigolibroResponse17 = skel.buscarLibroPorCodigoO(wrappedParam);
 
                     envelope = toEnvelope(getSOAPFactory(msgContext),
-                            codigolibroResponse11, false,
+                            codigolibroResponse17, false,
                             new javax.xml.namespace.QName(
                                 "http://elelemtos.com/Libro2/",
                                 "codigolibroResponse"));
@@ -95,6 +110,28 @@ public class LibrosMessageReceiverInOut extends org.apache.axis2.receivers.Abstr
         throws org.apache.axis2.AxisFault {
         try {
             return param.getOMElement(com.elelemtos.libro2.LibrosResponse.MY_QNAME,
+                org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+        } catch (org.apache.axis2.databinding.ADBException e) {
+            throw org.apache.axis2.AxisFault.makeFault(e);
+        }
+    }
+
+    private org.apache.axiom.om.OMElement toOM(
+        com.elelemtos.libro2.IdlibroRequest param, boolean optimizeContent)
+        throws org.apache.axis2.AxisFault {
+        try {
+            return param.getOMElement(com.elelemtos.libro2.IdlibroRequest.MY_QNAME,
+                org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+        } catch (org.apache.axis2.databinding.ADBException e) {
+            throw org.apache.axis2.AxisFault.makeFault(e);
+        }
+    }
+
+    private org.apache.axiom.om.OMElement toOM(
+        com.elelemtos.libro2.IdlibroResponse param, boolean optimizeContent)
+        throws org.apache.axis2.AxisFault {
+        try {
+            return param.getOMElement(com.elelemtos.libro2.IdlibroResponse.MY_QNAME,
                 org.apache.axiom.om.OMAbstractFactory.getOMFactory());
         } catch (org.apache.axis2.databinding.ADBException e) {
             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -149,6 +186,30 @@ public class LibrosMessageReceiverInOut extends org.apache.axis2.receivers.Abstr
 
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
+        com.elelemtos.libro2.IdlibroResponse param, boolean optimizeContent,
+        javax.xml.namespace.QName elementQName)
+        throws org.apache.axis2.AxisFault {
+        try {
+            org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+
+            emptyEnvelope.getBody()
+                         .addChild(param.getOMElement(
+                    com.elelemtos.libro2.IdlibroResponse.MY_QNAME, factory));
+
+            return emptyEnvelope;
+        } catch (org.apache.axis2.databinding.ADBException e) {
+            throw org.apache.axis2.AxisFault.makeFault(e);
+        }
+    }
+
+    private com.elelemtos.libro2.IdlibroResponse wrapbuscarLibroPorIdO() {
+        com.elelemtos.libro2.IdlibroResponse wrappedElement = new com.elelemtos.libro2.IdlibroResponse();
+
+        return wrappedElement;
+    }
+
+    private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
+        org.apache.axiom.soap.SOAPFactory factory,
         com.elelemtos.libro2.CodigolibroResponse param,
         boolean optimizeContent, javax.xml.namespace.QName elementQName)
         throws org.apache.axis2.AxisFault {
@@ -188,6 +249,14 @@ public class LibrosMessageReceiverInOut extends org.apache.axis2.receivers.Abstr
 
             if (com.elelemtos.libro2.CodigolibroResponse.class.equals(type)) {
                 return com.elelemtos.libro2.CodigolibroResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+            }
+
+            if (com.elelemtos.libro2.IdlibroRequest.class.equals(type)) {
+                return com.elelemtos.libro2.IdlibroRequest.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+            }
+
+            if (com.elelemtos.libro2.IdlibroResponse.class.equals(type)) {
+                return com.elelemtos.libro2.IdlibroResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
             }
 
             if (com.elelemtos.libro2.LibrosRequest.class.equals(type)) {

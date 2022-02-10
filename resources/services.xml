@@ -13,6 +13,10 @@
             <actionMapping>listaLibrosO</actionMapping>
             <outputActionMapping>http://libreria.com/Libro2/librosPT/listaLibrosOResponse</outputActionMapping>
         </operation>
+        <operation name="buscarLibroPorIdO" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://libreria.com/Libro2/">
+            <actionMapping>buscarLibroPorIdO</actionMapping>
+            <outputActionMapping>http://libreria.com/Libro2/librosPT/buscarLibroPorIdOResponse</outputActionMapping>
+        </operation>
         <operation name="buscarLibroPorCodigoO" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://libreria.com/Libro2/">
             <actionMapping>buscarLibroPorCodigoO</actionMapping>
             <outputActionMapping>http://libreria.com/Libro2/librosPT/buscarLibroPorCodigoOResponse</outputActionMapping>

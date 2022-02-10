@@ -1,5 +1,5 @@
 /**
- * CodigolibroRequest.java
+ * IdlibroResponse.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.7.9  Built on : Nov 16, 2018 (12:06:07 GMT)
@@ -8,46 +8,34 @@ package com.elelemtos.libro2;
 
 
 /**
- *  CodigolibroRequest bean class
+ *  IdlibroResponse bean class
  */
 @SuppressWarnings({"unchecked",
     "unused"
 })
-public class CodigolibroRequest implements org.apache.axis2.databinding.ADBBean {
+public class IdlibroResponse implements org.apache.axis2.databinding.ADBBean {
     public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://elelemtos.com/Libro2/",
-            "codigolibroRequest", "ns1");
+            "idlibroResponse", "ns1");
 
     /**
-     * field for Codigo
+     * field for IdlibroResponse
      */
-    protected java.lang.String localCodigo;
-
-    /*  This tracker boolean wil be used to detect whether the user called the set method
-     *   for this attribute. It will be used to determine whether to include this field
-     *   in the serialized XML
-     */
-    protected boolean localCodigoTracker = false;
-
-    public boolean isCodigoSpecified() {
-        return localCodigoTracker;
-    }
+    protected com.elelemtos.libro2.Libro localIdlibroResponse;
 
     /**
      * Auto generated getter method
-     * @return java.lang.String
+     * @return com.elelemtos.libro2.Libro
      */
-    public java.lang.String getCodigo() {
-        return localCodigo;
+    public com.elelemtos.libro2.Libro getIdlibroResponse() {
+        return localIdlibroResponse;
     }
 
     /**
      * Auto generated setter method
-     * @param param Codigo
+     * @param param IdlibroResponse
      */
-    public void setCodigo(java.lang.String param) {
-        localCodigoTracker = param != null;
-
-        this.localCodigo = param;
+    public void setIdlibroResponse(com.elelemtos.libro2.Libro param) {
+        this.localIdlibroResponse = param;
     }
 
     /**
@@ -75,46 +63,13 @@ public class CodigolibroRequest implements org.apache.axis2.databinding.ADBBean 
         javax.xml.stream.XMLStreamWriter xmlWriter, boolean serializeType)
         throws javax.xml.stream.XMLStreamException,
             org.apache.axis2.databinding.ADBException {
-        java.lang.String prefix = null;
-        java.lang.String namespace = null;
-
-        prefix = parentQName.getPrefix();
-        namespace = parentQName.getNamespaceURI();
-        writeStartElement(prefix, namespace, parentQName.getLocalPart(),
-            xmlWriter);
-
-        if (serializeType) {
-            java.lang.String namespacePrefix = registerPrefix(xmlWriter,
-                    "http://elelemtos.com/Libro2/");
-
-            if ((namespacePrefix != null) &&
-                    (namespacePrefix.trim().length() > 0)) {
-                writeAttribute("xsi",
-                    "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    namespacePrefix + ":codigolibroRequest", xmlWriter);
-            } else {
-                writeAttribute("xsi",
-                    "http://www.w3.org/2001/XMLSchema-instance", "type",
-                    "codigolibroRequest", xmlWriter);
-            }
+        //We can safely assume an element has only one type associated with it
+        if (localIdlibroResponse == null) {
+            throw new org.apache.axis2.databinding.ADBException(
+                "idlibroResponse cannot be null!");
         }
 
-        if (localCodigoTracker) {
-            namespace = "http://elelemtos.com/Libro2/";
-            writeStartElement(null, namespace, "codigo", xmlWriter);
-
-            if (localCodigo == null) {
-                // write the nil attribute
-                throw new org.apache.axis2.databinding.ADBException(
-                    "codigo cannot be null!!");
-            } else {
-                xmlWriter.writeCharacters(localCodigo);
-            }
-
-            xmlWriter.writeEndElement();
-        }
-
-        xmlWriter.writeEndElement();
+        localIdlibroResponse.serialize(MY_QNAME, xmlWriter);
     }
 
     private static java.lang.String generatePrefix(java.lang.String namespace) {
@@ -332,9 +287,9 @@ public class CodigolibroRequest implements org.apache.axis2.databinding.ADBBean 
          * Postcondition: If this object is an element, the reader is positioned at its end element
          *                If this object is a complex type, the reader is positioned at the end element of its outer element
          */
-        public static CodigolibroRequest parse(
+        public static IdlibroResponse parse(
             javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
-            CodigolibroRequest object = new CodigolibroRequest();
+            IdlibroResponse object = new IdlibroResponse();
 
             int event;
             javax.xml.namespace.QName currentQName = null;
@@ -348,76 +303,29 @@ public class CodigolibroRequest implements org.apache.axis2.databinding.ADBBean 
 
                 currentQName = reader.getName();
 
-                if (reader.getAttributeValue(
-                            "http://www.w3.org/2001/XMLSchema-instance", "type") != null) {
-                    java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                            "type");
-
-                    if (fullTypeName != null) {
-                        java.lang.String nsPrefix = null;
-
-                        if (fullTypeName.indexOf(":") > -1) {
-                            nsPrefix = fullTypeName.substring(0,
-                                    fullTypeName.indexOf(":"));
-                        }
-
-                        nsPrefix = (nsPrefix == null) ? "" : nsPrefix;
-
-                        java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
-                                    ":") + 1);
-
-                        if (!"codigolibroRequest".equals(type)) {
-                            //find namespace for the prefix
-                            java.lang.String nsUri = reader.getNamespaceContext()
-                                                           .getNamespaceURI(nsPrefix);
-
-                            return (CodigolibroRequest) com.elelemtos.libro2.ExtensionMapper.getTypeObject(nsUri,
-                                type, reader);
-                        }
-                    }
-                }
-
                 // Note all attributes that were handled. Used to differ normal attributes
                 // from anyAttributes.
                 java.util.Vector handledAttributes = new java.util.Vector();
 
-                reader.next();
+                while (!reader.isEndElement()) {
+                    if (reader.isStartElement()) {
+                        if (reader.isStartElement() &&
+                                new javax.xml.namespace.QName(
+                                    "http://elelemtos.com/Libro2/",
+                                    "idlibroResponse").equals(reader.getName())) {
+                            object.setIdlibroResponse(com.elelemtos.libro2.Libro.Factory.parse(
+                                    reader));
+                        } // End of if for expected property start element
 
-                while (!reader.isStartElement() && !reader.isEndElement())
-                    reader.next();
-
-                if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName(
-                            "http://elelemtos.com/Libro2/", "codigo").equals(
-                            reader.getName())) {
-                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                            "nil");
-
-                    if ("true".equals(nillableValue) ||
-                            "1".equals(nillableValue)) {
-                        throw new org.apache.axis2.databinding.ADBException(
-                            "The element: " + "codigo" + "  cannot be null");
+                        else {
+                            // 3 - A start element we are not expecting indicates an invalid parameter was passed
+                            throw new org.apache.axis2.databinding.ADBException(
+                                "Unexpected subelement " + reader.getName());
+                        }
+                    } else {
+                        reader.next();
                     }
-
-                    java.lang.String content = reader.getElementText();
-
-                    object.setCodigo(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            content));
-
-                    reader.next();
-                } // End of if for expected property start element
-
-                else {
-                }
-
-                while (!reader.isStartElement() && !reader.isEndElement())
-                    reader.next();
-
-                if (reader.isStartElement()) {
-                    // 2 - A start element we are not expecting indicates a trailing invalid property
-                    throw new org.apache.axis2.databinding.ADBException(
-                        "Unexpected subelement " + reader.getName());
-                }
+                } // end of while loop
             } catch (javax.xml.stream.XMLStreamException e) {
                 throw new java.lang.Exception(e);
             }

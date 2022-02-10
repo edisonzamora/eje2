@@ -17,8 +17,16 @@
     <wsdl:part name="parameters" element="l:codigolibroRequest">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="libroIdResponseM">
+    <wsdl:part name="parameters" element="l:idlibroResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="libroCodigoResponseM">
     <wsdl:part name="parameters" element="l:codigolibroResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="libroIdRequestM">
+    <wsdl:part name="parameters" element="l:idlibroRequest">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="librosPT">
@@ -32,6 +40,12 @@
       <wsdl:input message="lib:libroCodigoRequestM">
     </wsdl:input>
       <wsdl:output message="lib:libroCodigoResponseM">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buscarLibroPorIdO">
+      <wsdl:input message="lib:libroIdRequestM">
+    </wsdl:input>
+      <wsdl:output message="lib:libroIdResponseM">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -48,6 +62,15 @@
     </wsdl:operation>
     <wsdl:operation name="buscarLibroPorCodigoO">
       <soap:operation soapAction="buscarLibroPorCodigoO" style="document"/>
+      <wsdl:input>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buscarLibroPorIdO">
+      <soap:operation soapAction="buscarLibroPorIdO" style="document"/>
       <wsdl:input>
         <soap:body parts="parameters" use="literal"/>
       </wsdl:input>

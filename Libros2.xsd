@@ -2,11 +2,26 @@
 <xsd:schema elementFormDefault="qualified" targetNamespace="http://elelemtos.com/Libro2/"
 	xmlns:tipos="http://elelemtos.com/Libro2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-	<xsd:element name="librosRequest" type="tipos:libro" />
+	<xsd:element name="librosRequest" />
 	<xsd:element name="librosResponse" type="tipos:listaLibros" />
-	<xsd:element name="codigolibroRequest" type="tipos:codigo" />
+	<xsd:element name="codigolibroRequest">
+	<xsd:complexType>
+	<xsd:sequence>
+	<xsd:element minOccurs="0" maxOccurs="1" name="codigo"
+				type="xsd:string" />
+	</xsd:sequence>
+	</xsd:complexType>
+	</xsd:element>
 	<xsd:element name="codigolibroResponse" type="tipos:libro" />
-	
+	<xsd:element name="idlibroRequest">
+	<xsd:complexType>
+	<xsd:sequence>
+	<xsd:element minOccurs="0" maxOccurs="1" name="id"
+				type="xsd:string" />
+	</xsd:sequence>
+	</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="idlibroResponse" type="tipos:libro" />
 	<xsd:complexType name="listaLibros">
 		<xsd:sequence>
 			<xsd:element minOccurs="0" maxOccurs="unbounded" name="libros"
@@ -24,11 +39,5 @@
 			<xsd:element minOccurs="0" maxOccurs="1" name="codigo"
 				type="xsd:string" />
 		</xsd:sequence>
-	</xsd:complexType>
-	<xsd:complexType name="codigo">
-	<xsd:sequence>
-	<xsd:element minOccurs="0" maxOccurs="1" name="codigo"
-				type="xsd:string" />
-	</xsd:sequence>
 	</xsd:complexType>
 </xsd:schema>

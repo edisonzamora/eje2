@@ -6,33 +6,81 @@
  */
 package com.libreria.libros;
 
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.elelemtos.libro2.CodigolibroResponse;
+import com.elelemtos.libro2.IdlibroResponse;
+import com.elelemtos.libro2.Libro;
+import com.elelemtos.libro2.LibrosResponse;
+import com.elelemtos.libro2.ListaLibros;
+import com.libreria.libros.dao.libos.LibroServicesImpl;
+import com.libreria.libros.dao.libos.LibrosServicios;
+import com.libreria.libros.utils.Mensaje;
+
+
 /**
- *  LibrosSkeleton java skeleton for the axisService
+ * LibrosSkeleton java skeleton for the axisService
  */
 public class LibrosSkeleton {
-    /**
-     * Auto generated method signature
-     *
-     * @param librosRequest
-     * @return librosResponse
-     */
-    public com.elelemtos.libro2.LibrosResponse listaLibrosO(
-        com.elelemtos.libro2.LibrosRequest librosRequest) {
-        //TODO : fill this with the necessary business logic
-        throw new java.lang.UnsupportedOperationException("Please implement " +
-            this.getClass().getName() + "#listaLibrosO");
-    }
+	private Logger logger = LogManager.getLogger(this);
+	private LibrosServicios servicioLib = new LibroServicesImpl();
 
-    /**
-     * Auto generated method signature
-     *
-     * @param codigolibroRequest
-     * @return codigolibroResponse
-     */
-    public com.elelemtos.libro2.CodigolibroResponse buscarLibroPorCodigoO(
-        com.elelemtos.libro2.CodigolibroRequest codigolibroRequest) {
-        //TODO : fill this with the necessary business logic
-        throw new java.lang.UnsupportedOperationException("Please implement " +
-            this.getClass().getName() + "#buscarLibroPorCodigoO");
-    }
+	/**
+	 * Auto generated method signature
+	 *
+	 * @param librosRequest
+	 * @return librosResponse
+	 */
+	public com.elelemtos.libro2.LibrosResponse listaLibrosO(com.elelemtos.libro2.LibrosRequest librosRequest) {
+		// TODO : fill this with the necessary business logic
+		logger.info(Mensaje.setMensaje("listaLibrosO service in"));
+		LibrosResponse librosResponse = new LibrosResponse();
+		ListaLibros lista = new ListaLibros();
+		// llamamos al servicio get Todos los libros
+		Libro[] listadb = servicioLib.todosLosLibros();
+		logger.info(Mensaje.setMensaje("listaLibrosO service Out"));
+		//agregamos la lista a el objeto que contendra la lista
+		lista.setLibros(listadb);
+		//llenamosla respuesta
+		librosResponse.setLibrosResponse(lista);
+
+		return librosResponse;
+	}
+
+	/**
+	 * Auto generated method signature
+	 *
+	 * @param idlibroRequest
+	 * @return idlibroResponse
+	 */
+	public com.elelemtos.libro2.IdlibroResponse buscarLibroPorIdO(com.elelemtos.libro2.IdlibroRequest idlibroRequest) {
+		logger.info(Mensaje.setMensaje("buscarLibroPorIdO service in"));
+		IdlibroResponse libroResponse = new IdlibroResponse();
+		String id = idlibroRequest.getId();
+		Libro libro = servicioLib.buscarPorId(id);
+		libroResponse.setIdlibroResponse(libro);
+		logger.info(Mensaje.setMensaje("buscarLibroPorIdO service out"));
+		return libroResponse;
+	}
+
+	/**
+	 * Auto generated method signature
+	 *
+	 * @param codigolibroRequest
+	 * @return codigolibroResponse
+	 */
+	public com.elelemtos.libro2.CodigolibroResponse buscarLibroPorCodigoO(
+			com.elelemtos.libro2.CodigolibroRequest codigolibroRequest) {
+		logger.info(Mensaje.setMensaje("buscarLibroPorCodigoO service in"));
+		CodigolibroResponse libroResponse = new CodigolibroResponse();
+		String codigo = codigolibroRequest.getCodigo();
+		Libro libro = servicioLib.buscarPorCodigo(codigo);
+		libroResponse.setCodigolibroResponse(libro);
+		logger.info(Mensaje.setMensaje("buscarLibroPorCodigoO service out"));
+		return libroResponse;
+	}
+
 }
