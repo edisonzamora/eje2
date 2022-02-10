@@ -33,7 +33,12 @@
 		<wsdl:part name="parameters" element="l:idlibroResponse">
 		</wsdl:part>
 	</wsdl:message>
-	
+	<wsdl:message name="addLibroRequestM">
+		<wsdl:part name="parameters" element="l:addRequest" />
+	</wsdl:message>
+	<wsdl:message name="addLibroResponseM">
+		<wsdl:part name="parameters" element="l:addResponse"/>
+	</wsdl:message>
 	<wsdl:portType name="librosPT">
 		<wsdl:operation name="listaLibrosO">
 			<wsdl:input message="lib:librosRequestM">
@@ -52,6 +57,10 @@
 			</wsdl:input>
 			<wsdl:output message="lib:libroIdResponseM">
 			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addLibroO">
+			<wsdl:input message="lib:addLibroRequestM" />
+			<wsdl:output message="lib:addLibroResponseM" />
 		</wsdl:operation>
 	</wsdl:portType>
 	
@@ -86,7 +95,15 @@
 				<soap:body parts="parameters" use="literal" />
 			</wsdl:output>
 		</wsdl:operation>
-		
+		<wsdl:operation name="addLibroO">
+			<soap:operation soapAction="addLibroO" style="document" />
+			<wsdl:input>
+				<soap:body parts="parameters" use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="parameters" use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
 	</wsdl:binding>
 	
 	<wsdl:service name="Libros">

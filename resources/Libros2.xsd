@@ -18,6 +18,8 @@
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="idlibroResponse" type="tipos:libro"/>
+    <xsd:element name="addRequest" type="tipos:libro"/>
+    <xsd:element name="addResponse" type="tipos:listaLibros"/>
     <xsd:complexType name="listaLibros">
         <xsd:sequence>
             <xsd:element maxOccurs="unbounded" minOccurs="0" name="libros" type="tipos:libro"/>

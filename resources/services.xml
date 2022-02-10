@@ -21,5 +21,9 @@
             <actionMapping>buscarLibroPorCodigoO</actionMapping>
             <outputActionMapping>http://libreria.com/Libro2/librosPT/buscarLibroPorCodigoOResponse</outputActionMapping>
         </operation>
+        <operation name="addLibroO" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://libreria.com/Libro2/">
+            <actionMapping>addLibroO</actionMapping>
+            <outputActionMapping>http://libreria.com/Libro2/librosPT/addLibroOResponse</outputActionMapping>
+        </operation>
     </service>
 </serviceGroup>

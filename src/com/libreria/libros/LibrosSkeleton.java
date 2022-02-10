@@ -82,5 +82,17 @@ public class LibrosSkeleton {
 		logger.info(Mensaje.setMensaje("buscarLibroPorCodigoO service out"));
 		return libroResponse;
 	}
+	/**
+     * Auto generated method signature
+     *
+     * @param addRequest
+     * @return addResponse
+     */
+    public com.elelemtos.libro2.AddResponse addLibroO(
+        com.elelemtos.libro2.AddRequest addRequest) {
+        //TODO : fill this with the necessary business logic
+        throw new java.lang.UnsupportedOperationException("Please implement " +
+            this.getClass().getName() + "#addLibroO");
+    }
 
 }
