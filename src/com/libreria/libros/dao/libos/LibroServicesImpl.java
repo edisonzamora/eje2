@@ -27,28 +27,71 @@ public class LibroServicesImpl implements LibrosServicios {
 	}
 
 	@Override
-	public String agregarLibro(Libro libro) {
+	public boolean agregarLibro(Libro libro) {
+		return agregar(libro);
+	}
+
+	public Libro[] agregarLibro(String id, String codigo, String nombre, String autor) {
+		Libro libroadd = new Libro();
+		libroadd.setId(id);
+		libroadd.setCodigo(codigo);
+		libroadd.setNombre(nombre);
+		libroadd.setAutor(autor);
+		if (agregar(libroadd)) {
+			return todosLosLibros();
+		}
+		return null;
+	}
+
+	private boolean agregar(Libro libro) {
 		logger.info(Mensaje.setMensaje("servicio agregarLibro"));
-		String mensaje = "REVISE LOS DATOS , FALTA ALGUNO ";
-
-		if (!libro.getAutor().equalsIgnoreCase("")
-				|| libro.getAutor() != null && !libro.getNombre().equalsIgnoreCase("") || libro.getNombre() != null) {
-			logger.info("con autor y nombre");
-			// asigamnos al libro un codigo aleatorio
+		// buscamos x id si existe, verificamos que el id no esta vacio
+		
+		if (!libro.getId().equals("")) {
+			if (buscarPorId(libro.getId()) != null) {
+				logger.info(Mensaje.setMensaje("escontrado x id"));
+				return false;
+			}
+			logger.info(Mensaje.setMensaje("no escontrado x id"));
+		}
+		// setiamos el id--- ya que generara autoamaticamente en bd
+		logger.info(Mensaje.setMensaje("setiamos ID"));
+		
+		// buscamos x codigo si existe, verificamos que el codigo no esta vacio
+		// si codigo no esta espesificado, le asignamos uno.
+		logger.info(Mensaje.setMensaje("buscamos x codigo"));
+		if(libro.getCodigo()==null){
+			logger.info(Mensaje.setMensaje("codigo null"));
+			libro.setCodigo("");
+		}
+		if (!libro.getCodigo().equalsIgnoreCase("")) {
+			logger.info(Mensaje.setMensaje("codigo:" + libro.getCodigo()));
+			if (buscarPorCodigo(libro.getCodigo()) != null) {
+				logger.info(Mensaje.setMensaje("escontrado x codigo"));
+				return false;
+			}
+		} else {
+			// codigo vacio añadimos alearotiaente y buscamos x codigo 
+			logger.info(Mensaje.setMensaje("codigo no espesificado añadios aleatorio"));
 			libro.setCodigo(generateCode());
-			// buscamos x codigo
-			String codigo = libro.getCodigo();
-			if (false == existeCodigo(codigo)) {
-				logger.info("vamos a registrarlo");
-
-				if (libroDao.addLibro(libro)) {
-					mensaje = "REGISTRADO CORRECTAMENTE";
-					return mensaje;
-				}
+			if (buscarPorCodigo(libro.getCodigo()) != null) {
+				logger.info(Mensaje.setMensaje("escontrado x codigo"));
+				return false;
 			}
 		}
-
-		return mensaje;
+		// verifocamos obligatorio el nombre del libro
+		if (libro.getNombre().equalsIgnoreCase("")) {
+			logger.info(Mensaje.setMensaje("falta el nombre"));
+			return false;
+		}
+		// agregamos el libro
+		libro.setId("");
+		if (libroDao.addLibro(libro)) {
+			logger.info(Mensaje.setMensaje("agregado corectamente"));
+			return true;
+		}
+		logger.info(Mensaje.setMensaje(" no se a podido agregar"));
+		return false;
 	}
 
 	private String generateCode() {
@@ -63,14 +106,9 @@ public class LibroServicesImpl implements LibrosServicios {
 		return libroencontrado;
 	}
 
-	private boolean existeCodigo(String codigo) {
-		logger.info("existeCodigo ?");
-		if (null != buscarPorCodigo(codigo)) {
-			logger.info("existe");
-			return true;
-		}
-		logger.info("No existe");
-		return false;
+	public Libro buscarPorCodigo(Libro libro) {
+		Libro libroencontrado = buscarPorCodigo(libro.getCodigo());
+		return libroencontrado;
 	}
 
 	@Override
@@ -79,13 +117,14 @@ public class LibroServicesImpl implements LibrosServicios {
 		List<Libro> libros = libroDao.getAllLibros();
 		return listToArray(libros);
 	}
-	private Libro [] listToArray(List<Libro> lista ){
-		Libro[] elements = new Libro [lista.size()];
-    	for (int i=0 ;i <lista.size(); i++) {
-    		elements[i]= lista.get(i);
-		}   
-    	return elements;
-		
+
+	private Libro[] listToArray(List<Libro> lista) {
+		Libro[] elements = new Libro[lista.size()];
+		for (int i = 0; i < lista.size(); i++) {
+			elements[i] = lista.get(i);
+		}
+		return elements;
+
 	}
 
 }

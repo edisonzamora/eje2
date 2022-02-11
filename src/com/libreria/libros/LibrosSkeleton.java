@@ -11,6 +11,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.elelemtos.libro2.AddResponse;
 import com.elelemtos.libro2.CodigolibroResponse;
 import com.elelemtos.libro2.IdlibroResponse;
 import com.elelemtos.libro2.Libro;
@@ -20,13 +21,12 @@ import com.libreria.libros.dao.libos.LibroServicesImpl;
 import com.libreria.libros.dao.libos.LibrosServicios;
 import com.libreria.libros.utils.Mensaje;
 
-
 /**
  * LibrosSkeleton java skeleton for the axisService
  */
 public class LibrosSkeleton {
 	private Logger logger = LogManager.getLogger(this);
-	private LibrosServicios servicioLib = new LibroServicesImpl();
+	private LibroServicesImpl servicioLib = new LibroServicesImpl();
 
 	/**
 	 * Auto generated method signature
@@ -42,9 +42,9 @@ public class LibrosSkeleton {
 		// llamamos al servicio get Todos los libros
 		Libro[] listadb = servicioLib.todosLosLibros();
 		logger.info(Mensaje.setMensaje("listaLibrosO service Out"));
-		//agregamos la lista a el objeto que contendra la lista
+		// agregamos la lista a el objeto que contendra la lista
 		lista.setLibros(listadb);
-		//llenamosla respuesta
+		// llenamosla respuesta
 		librosResponse.setLibrosResponse(lista);
 
 		return librosResponse;
@@ -82,17 +82,35 @@ public class LibrosSkeleton {
 		logger.info(Mensaje.setMensaje("buscarLibroPorCodigoO service out"));
 		return libroResponse;
 	}
+
 	/**
-     * Auto generated method signature
-     *
-     * @param addRequest
-     * @return addResponse
-     */
-    public com.elelemtos.libro2.AddResponse addLibroO(
-        com.elelemtos.libro2.AddRequest addRequest) {
-        //TODO : fill this with the necessary business logic
-        throw new java.lang.UnsupportedOperationException("Please implement " +
-            this.getClass().getName() + "#addLibroO");
-    }
+	 * Auto generated method signature
+	 *
+	 * @param addRequest
+	 * @return addResponse
+	 */
+	public com.elelemtos.libro2.AddResponse addLibroO(com.elelemtos.libro2.AddRequest addRequest) {
+		logger.info(Mensaje.setMensaje("addLibroO service in"));
+		AddResponse libroResponse = new AddResponse();
+		ListaLibros lista = new ListaLibros();
+		Libro libroRequest = addRequest.getAddRequest();
+		Libro[] listadb = servicioLib.agregarLibro(libroRequest.getId(), libroRequest.getCodigo(),
+				libroRequest.getNombre(), libroRequest.getAutor());
+		// si el servicio no devuelve un arry lleno lo devolvenos
+		if (null != listadb) {
+			lista.setLibros(listadb);
+			libroResponse.setAddResponse(lista);
+			logger.info(Mensaje.setMensaje("addLibroO service out"));
+			return libroResponse;
+		}
+		logger.info(Mensaje.setMensaje("lista vacia"));
+		// si esta vacio , lo iniciamos y lo retormamos 
+		listadb = new Libro[1];
+		lista.setLibros(listadb);
+		libroResponse.setAddResponse(lista);
+		logger.info(Mensaje.setMensaje("addLibroO service out"));
+		return libroResponse;
+
+	}
 
 }

@@ -10,7 +10,7 @@ public interface LibrosServicios {
 	
 	public Libro buscarPorCodigo(String codigo);
 	
-	public String agregarLibro(Libro libro);
-		
+	public boolean agregarLibro(Libro libro);
+	
 	public Libro[] todosLosLibros();
 }

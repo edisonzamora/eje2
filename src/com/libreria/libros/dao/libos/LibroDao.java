@@ -23,12 +23,12 @@ public class LibroDao extends DaoComun {
 
 	public Libro getFineById(String Id) {
 		logger.info(Mensaje.setMensaje("getFineById DAO"));
-		select_from_libros += "WHERE id=:id";
+		String query = select_from_libros + "WHERE id=:id";
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("id", Id);
 		LibroMapper libroMapper = new LibroMapper();
-		logger.info(Mensaje.setMensaje("query: " + select_from_libros));
-		List<Libro> resul = getNamedParameterJdbcTemplate().query(select_from_libros, param, libroMapper);
+		logger.info(Mensaje.setMensaje("query: " + query));
+		List<Libro> resul = getNamedParameterJdbcTemplate().query(query, param, libroMapper);
 		logger.info(Mensaje.setMensaje("libro x id encotrados: " + resul.size()));
 		if (resul.size() == 1) {
 			Libro libroResponse = resul.get(0);
@@ -67,12 +67,12 @@ public class LibroDao extends DaoComun {
 	// retorna null si no encuentra libros o hay un error de conección
 	public Libro getFineByCodigo(String codigo) {
 		logger.info(Mensaje.setMensaje("getFineByCodigo DAO"));
-		select_from_libros += "WHERE codigo=:codigo";
-		logger.info(Mensaje.setMensaje("query: " + select_from_libros));
+		String query = select_from_libros + "WHERE codigo=:codigo";
+		logger.info(Mensaje.setMensaje("query: " + query));
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("codigo", codigo);
 		LibroMapper libroMapper = new LibroMapper();
-		List<Libro> resul = getNamedParameterJdbcTemplate().query(select_from_libros, param, libroMapper);
+		List<Libro> resul = getNamedParameterJdbcTemplate().query(query, param, libroMapper);
 		logger.info(Mensaje.setMensaje("libro x codigo encotrados: " + resul.size()));
 		if (resul.size() == 1) {
 			Libro libroResponse = resul.get(0);
@@ -81,8 +81,8 @@ public class LibroDao extends DaoComun {
 		logger.info(Mensaje.setMensaje("libro x codigo no encontrado"));
 		return null;
 	}
-	
-	public List<Libro> getAllLibros(){
+
+	public List<Libro> getAllLibros() {
 		Map<String, String> param = new HashMap<String, String>();
 		LibroMapper libroMapper = new LibroMapper();
 		List<Libro> resul = getNamedParameterJdbcTemplate().query(select_from_libros, param, libroMapper);
