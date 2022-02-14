@@ -104,13 +104,11 @@ public class LibrosSkeleton {
 			return libroResponse;
 		}
 		logger.info(Mensaje.setMensaje("lista vacia"));
-		// si esta vacio , lo iniciamos y lo retormamos 
+		// si esta vacio , lo iniciamos y lo retormamos
 		listadb = new Libro[1];
 		lista.setLibros(listadb);
 		libroResponse.setAddResponse(lista);
 		logger.info(Mensaje.setMensaje("addLibroO service out"));
 		return libroResponse;
-
 	}
-
 }
